@@ -1,0 +1,48 @@
+<%# ####################################################
+#############   3. GENERATING A NEW GAME   #############
+#############    a) games_controller.rb    #############
+#############       b) new.html.erb        #############
+######################################################## %>
+
+
+<%#
+
+==> cf. games_controller (can't comment properly erb code)
+
+%>
+
+
+
+
+<%# ####################################################
+#############   4. COMPUTING THE SCORE     #############
+#############    a) games_controller.rb    #############
+#############       b) new.html.erb        #############
+######################################################## %>
+
+
+
+
+<div class="container mt-5">
+  <h1>Welcome to the Longest Word Game!</h1>
+
+  <!-- Display the randomly generated grid of letters -->
+  <h2>Here is your grid:</h2>
+  <p><%= @letters.join(" ") %></p>
+
+  <!-- Form for the user to input their word and submit it to the 'score' action -->
+  <h2>What's your best shot?</h2>
+  <%= form_with url: { action: :score }, method: :post, data: { turbo: false } do |form| %>
+    <!-- Add the authenticity token for CSRF protection -->
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+    <!-- Add a hidden field to pass the randomly generated grid of letters as a parameter -->
+    <%= hidden_field_tag :letters, @letters.join(",") %>
+
+    <!-- Text field for the user to input their word -->
+    <%= form.text_field :word %>
+
+    <!-- Submit button to submit the form -->
+    <%= form.submit "Submit" %>
+  <% end %>
+</div>
